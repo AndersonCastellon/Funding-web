@@ -1,0 +1,45 @@
+@import "./variables";
+
+.card-campaign {
+  width: 20rem;
+  height: 600px;
+
+  .campaign-card-img {
+    height: 220px;
+  }
+
+  .campaign-status {
+    font-size: $base-font;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  .favorite-icon {
+    font-size: $base-font;
+  }
+
+  .campaign-title {
+    font-weight: bold;
+    height: 40px;
+  }
+  .campaign-description {
+  }
+
+  .campaign-category {
+    font-size: $base-font;
+    font-weight: bold;
+  }
+
+  .campaign-amount {
+    font-size: $base-font;
+    font-weight: bold;
+
+    span {
+      font-weight: 100;
+      font-size: $mini-font;
+    }
+  }
+
+  .campaign-progress {
+    font-size: $base-font;
+  }
+}

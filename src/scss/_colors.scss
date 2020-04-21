@@ -1,0 +1,17 @@
+@import "./variables";
+
+/* Text color
+-------------------------------*/
+.white-color {
+  color: $light;
+}
+.white-color-light {
+  color: rgba($light, 0.65);
+}
+.dark-color {
+  color: $dark;
+}
+
+.body-color {
+  color: $extra-light;
+}

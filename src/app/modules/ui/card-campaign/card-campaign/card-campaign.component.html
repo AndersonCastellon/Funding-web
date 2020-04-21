@@ -1,0 +1,55 @@
+<div class="card card-campaign shadow-sm mb-4 pb-0">
+  <img
+    [src]="campaign.photo"
+    class="card-img-top img-fluid campaign-card-img"
+    [alt]="campaign.title"
+  />
+  <div class="card-body">
+    <div class="row">
+      <div class="col-6 campaign-status">
+        <p class="text-success">{{ campaign.status }}</p>
+      </div>
+      <div class="col-6">
+        <i class="far fa-heart float-right favorite-icon"></i>
+      </div>
+    </div>
+    <hr class="mt-0" />
+    <h5 class="card-title campaign-title">{{ campaign.title }}</h5>
+    <p class="card-text text-muted campaign-description">
+      {{ campaign.description }}
+    </p>
+    <p class="campaign-category text-muted mb-0">{{ campaign.category }}</p>
+    <div class="row">
+      <div class="col-md-9">
+        <p class="campaign-amount">
+          {{ campaign.currentQuantity | currency }}
+          <span class="text-muted">USD recaudados</span>
+        </p>
+      </div>
+      <div class="col-md-3">
+        <p class="text-muted float-right campaign-progress">
+          {{ campaign.currentQuantity / campaign.targetQuantity | percent }}
+        </p>
+      </div>
+    </div>
+    <!-- Progress bar -->
+    <div class="progress">
+      <div
+        [attr.ariaValuenow]="
+          campaign.currentQuantity / campaign.targetQuantity | percent
+        "
+        [style.width]="
+          campaign.currentQuantity / campaign.targetQuantity | percent
+        "
+        class="progress-bar"
+        role="progressbar"
+        style="width: 75%;"
+        aria-valuemin="0"
+      ></div>
+    </div>
+    <!-- End Progress bar -->
+    <p class="text-muted pt-2 pb-0 mb-0">
+      <i class="fas fa-clock"></i> {{ campaign.finish | leftDays }}
+    </p>
+  </div>
+</div>
