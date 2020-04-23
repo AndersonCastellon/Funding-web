@@ -1,0 +1,7 @@
+<owl-carousel-o class="center" [options]="customOptions">
+  <ng-container *ngFor="let campaign of popularCampaigns">
+    <ng-template carouselSlide [id]="campaign.id">
+      <app-card-campaign [campaign]="campaign"></app-card-campaign>
+    </ng-template>
+  </ng-container>
+</owl-carousel-o>

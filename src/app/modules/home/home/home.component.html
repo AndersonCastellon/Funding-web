@@ -1,15 +1,10 @@
-<div class="row">
-  <div class="col-md-12">
-    <h4 class="lead">Proyectos populares</h4>
+<main>
+  <div class="row">
+    <div class="col-md-12"><h4 class="lead">Proyectos populares</h4></div>
   </div>
-</div>
-<div class="row">
-  <div class="col-md-12">
-    <aside class="card-deck justify-content-between">
-      <app-card-campaign
-        *ngFor="let campaign of campaigns"
-        [campaign]="campaign"
-      ></app-card-campaign>
-    </aside>
-  </div>
-</div>
+  <section class="row">
+    <div class="col-md-12">
+      <app-slide [popularCampaigns]="campaigns"></app-slide>
+    </div>
+  </section>
+</main>

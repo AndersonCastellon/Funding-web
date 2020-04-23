@@ -2,7 +2,6 @@
 
 .card-campaign {
   width: 20rem;
-  height: 600px;
 
   .campaign-card-img {
     height: 220px;
@@ -18,10 +17,12 @@
   }
 
   .campaign-title {
+    font-size: $base-font;
     font-weight: bold;
     height: 40px;
   }
   .campaign-description {
+    font-size: $small-font;
   }
 
   .campaign-category {
