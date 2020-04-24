@@ -1,0 +1,19 @@
+@import "./variables";
+
+.blog-section {
+  .blog-section-title {
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .blog-section-subtitle {
+    font-size: $base-font;
+    text-align: center;
+  }
+
+  .blog-entries {
+    display: flex;
+    justify-content: space-between;
+  }
+}

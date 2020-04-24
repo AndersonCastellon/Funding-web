@@ -1,0 +1,14 @@
+<div class="card card-blog-entry">
+  <img
+    [src]="blogEntry.photoUrl"
+    class="card-img-top"
+    [alt]="blogEntry.title"
+  />
+  <div class="card-body">
+    <h5 class="card-title">{{ blogEntry.title | slice: 0:25 }}</h5>
+    <p class="card-text">{{ blogEntry.description | slice: 0:120 }}...</p>
+    <a [routerLink]="['/blog/posts', blogEntry.url]" class="card-link"
+      >LEER MÁS...</a
+    >
+  </div>
+</div>

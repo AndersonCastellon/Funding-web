@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CampaignsService } from '../../shared/services/campaigns.service';
 import { Campaign } from 'src/app/models/campaign.model';
+import { BlogEntry } from 'src/app/models/blog-entry.model';
+import { BlogEntriesService } from '../../shared/services/blog-entries.service';
 
 @Component({
   selector: 'app-home',
@@ -9,9 +11,11 @@ import { Campaign } from 'src/app/models/campaign.model';
 })
 export class HomeComponent implements OnInit {
   public campaigns: Campaign[];
-  constructor(private cs: CampaignsService) {}
+  public blogEntries: BlogEntry[];
+  constructor(private cs: CampaignsService, private be: BlogEntriesService) {}
 
   ngOnInit(): void {
     this.campaigns = this.cs.getCampaigns();
+    this.blogEntries = this.be.getBlogEntries();
   }
 }

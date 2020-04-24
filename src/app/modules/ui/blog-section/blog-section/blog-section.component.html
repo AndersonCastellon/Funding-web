@@ -1,0 +1,18 @@
+<div class="blog-section">
+  <div>
+    <h6 class="blog-section-title">
+      Conoce a los mejores emprendedores de nuestra tierra
+    </h6>
+    <p class="blog-section-subtitle text-muted">
+      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptate saepe
+      rerum odio sunt fugiat, tempore similique in magni amet possimus libero
+      expedita placeat blanditiis aliquam officiis voluptas quod, eum esse?
+    </p>
+  </div>
+  <div class="blog-entries">
+    <app-blog-entry
+      *ngFor="let entry of blogEntries"
+      [blogEntry]="entry"
+    ></app-blog-entry>
+  </div>
+</div>
