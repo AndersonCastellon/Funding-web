@@ -1,0 +1,45 @@
+@import "~bootstrap/scss/mixins/breakpoints";
+@import "~@nebular/theme/styles/global/breakpoints";
+@import "../../../themes";
+
+@include nb-install-component() {
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+    width: auto;
+    //width: calc(#{nb-theme(sidebar-width)} - #{nb-theme(header-padding)});
+  }
+
+  nb-user,
+  nb-action {
+    cursor: pointer;
+  }
+
+  ::ng-deep nb-search button {
+    padding: 0 !important;
+  }
+
+  .header-container {
+    display: flex;
+    align-items: center;
+    width: auto;
+
+    .logo {
+      padding: 0 1.25rem;
+      font-size: 1.75rem;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+  }
+
+  @include media-breakpoint-down(sm) {
+  }
+
+  @include media-breakpoint-down(is) {
+  }
+}
