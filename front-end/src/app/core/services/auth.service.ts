@@ -14,7 +14,7 @@ export class AuthService {
   private user: User;
   private token: string;
 
-  public tokenBehavior = new Subject<boolean>();
+  public auth = new Subject<boolean>();
 
   constructor(private http: HttpClient) {
     this.user = JSON.parse(localStorage.getItem('user')) || null;
@@ -28,7 +28,7 @@ export class AuthService {
     return this.http.post(endPoint, credentials).pipe(
       map((resp: any) => {
         this.saveUserLocal(resp.user, resp.token);
-        this.tokenBehavior.next(true);
+        this.auth.next(true);
         return true;
       })
     );

@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.authOb = this.authS.tokenBehavior.subscribe(() => {
+    this.authOb = this.authS.auth.subscribe(() => {
       this.loginFormClose();
     });
   }
