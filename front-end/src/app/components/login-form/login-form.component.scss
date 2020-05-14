@@ -13,10 +13,18 @@
       p {
         font-size: 20px;
         font-weight: bold;
+        margin-bottom: 8px;
+      }
+
+      small {
+        font-size: 15px;
       }
     }
 
-    .inputs {
+    .form {
+      display: flex;
+      flex-direction: column;
+
       .input-g {
         margin-top: 16px;
         .input-ctrl,
@@ -25,31 +33,40 @@
           margin-bottom: 0px;
         }
       }
-    }
 
-    .forgot-pass {
-      margin-top: 4px;
-      align-self: flex-end;
-      font-weight: bold;
-    }
-
-    .buttons {
-      margin-top: 16px;
-      .separator {
-        text-align: center;
-        margin-top: 8px;
-        margin-bottom: 8px;
+      .forgot-pass {
+        margin-top: 4px;
+        align-self: flex-end;
+        font-weight: bold;
       }
 
-      .google-btn {
-        background-color: white;
-        border: 1px solid gray;
+      .buttons {
+        margin-top: 16px;
+        .separator {
+          text-align: center;
+          margin-top: 8px;
+          margin-bottom: 8px;
+        }
 
-        .google-icon {
-          margin-left: 0;
-          margin-right: 20px;
-          width: 24px;
-          height: 24px;
+        .google-btn {
+          background-color: white;
+          border: 1px solid gray;
+
+          .google-icon {
+            margin-left: 0;
+            margin-right: 20px;
+            width: 24px;
+            height: 24px;
+          }
+        }
+      }
+
+      .to-signin {
+        align-self: center;
+        margin-top: 4px;
+
+        a {
+          font-weight: bold;
         }
       }
     }

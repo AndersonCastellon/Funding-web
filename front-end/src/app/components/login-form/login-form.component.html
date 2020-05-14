@@ -3,37 +3,89 @@
     <p>Bienvenido de nuevo</p>
     <small>Ingresa para continuar</small>
   </div>
-  <div class="inputs">
+  <form [formGroup]="loginForm" (ngSubmit)="login()" class="form">
     <div class="input-g">
       <label class="label-ctrl">Email</label>
       <input
+        formControlName="email"
+        name="email"
         class="input-ctrl"
         type="email"
         nbInput
         fullWidth
-        status="basic"
+        [status]="
+          loginForm.controls['email'].errors?.email ||
+          loginForm.controls['email'].errors?.required
+            ? 'danger'
+            : 'basic'
+        "
         placeholder="Email"
       />
+      <small
+        *ngIf="
+          loginForm.controls['email'].errors?.email &&
+          loginForm.controls['email'].dirty
+        "
+        class="text-danger"
+        >Ingresa un correo válido</small
+      >
+      <small
+        *ngIf="
+          loginForm.controls['email'].errors?.required &&
+          loginForm.controls['email'].dirty
+        "
+        class="text-danger"
+        >El correo es requerido</small
+      >
     </div>
     <div class="input-g">
       <label class="label-ctrl">Password</label>
       <input
+        formControlName="password"
+        name="password"
         class="input-ctrl"
         type="password"
         nbInput
         fullWidth
-        status="basic"
+        [status]="
+          loginForm.controls['password'].errors?.required ||
+          loginForm.controls['password'].errors?.minlength
+            ? 'danger'
+            : 'basic'
+        "
         placeholder="Password"
       />
+      <small
+        *ngIf="
+          loginForm.controls['password'].errors?.required &&
+          loginForm.controls['password'].dirty
+        "
+        class="text-danger"
+        >La contraseña es requerida</small
+      >
+      <small
+        *ngIf="
+          loginForm.controls['password'].errors?.minlength &&
+          loginForm.controls['password'].dirty
+        "
+        class="text-danger"
+        >Se requieren al menos 6 caracteres</small
+      >
     </div>
-  </div>
-  <small class="forgot-pass"><a href="#">Olvidaste tu contraseña?</a></small>
-  <div class="buttons">
-    <button nbButton fullWidth hero status="primary">Iniciar sesión</button>
-    <p class="separator">O también</p>
-    <button class="google-btn" nbButton fullWidth>
-      <img src="../assets/icons/icon-google.svg" class="google-icon" />
-      Ingresar con Google
-    </button>
-  </div>
+    <small class="forgot-pass"><a href="#">Olvidaste tu contraseña?</a></small>
+
+    <div class="buttons">
+      <button type="submit" nbButton fullWidth hero status="primary">
+        Iniciar sesión
+      </button>
+      <p class="separator">O también</p>
+      <button type="button" class="google-btn" nbButton fullWidth>
+        <img src="../assets/icons/icon-google.svg" class="google-icon" />
+        Ingresar con Google
+      </button>
+    </div>
+    <small class="to-signin"
+      >No tienes cuenta? <a href="#">Registrate aquí</a></small
+    >
+  </form>
 </div>

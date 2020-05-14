@@ -1,18 +1,40 @@
-import { Component, OnInit } from '@angular/core';
-import { NbWindowService } from '@nebular/theme';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { NbWindowService, NbWindowRef } from '@nebular/theme';
 import { LoginFormComponent } from '../login-form/login-form.component';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
-  constructor(private windowService: NbWindowService) {}
+export class HeaderComponent implements OnInit, OnDestroy {
+  private loginFormRef: NbWindowRef;
+  private authOb: Subscription;
 
-  ngOnInit(): void {}
+  constructor(
+    private windowService: NbWindowService,
+    private authS: AuthService
+  ) {}
+
+  ngOnInit(): void {
+    this.authOb = this.authS.tokenBehavior.subscribe(() => {
+      this.loginFormClose();
+    });
+  }
 
   onLogin() {
-    this.windowService.open(LoginFormComponent);
+    this.loginFormRef = this.windowService.open(LoginFormComponent);
+  }
+
+  loginFormClose() {
+    if (this.loginFormRef) {
+      this.loginFormRef.close();
+    }
+  }
+
+  ngOnDestroy() {
+    this.authOb.unsubscribe();
   }
 }
