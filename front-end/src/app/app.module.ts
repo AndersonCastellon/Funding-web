@@ -26,7 +26,10 @@ import { MainContainerComponent } from './containers';
 
 // Template components
 import { HeaderComponent, FooterComponent } from './components';
-import { LoginFormComponent } from './components/login-form/login-form.component';
+import { LoginFormComponent, SigninFormComponent } from './components/forms/';
+
+// Directives
+import { GoogleSigninDirective } from './core/directives/google-signin.directive';
 
 @NgModule({
   declarations: [
@@ -35,6 +38,8 @@ import { LoginFormComponent } from './components/login-form/login-form.component
     HeaderComponent,
     FooterComponent,
     LoginFormComponent,
+    SigninFormComponent,
+    GoogleSigninDirective,
   ],
   imports: [
     BrowserModule,
@@ -50,9 +55,7 @@ import { LoginFormComponent } from './components/login-form/login-form.component
     NbInputModule,
     NbButtonModule,
     NbIconModule,
-    NbWindowModule.forRoot({
-      windowClass: 'window',
-    }),
+    NbWindowModule.forRoot({ windowClass: 'window' }),
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -14,8 +14,9 @@
         nbInput
         fullWidth
         [status]="
-          loginForm.controls['email'].errors?.email ||
-          loginForm.controls['email'].errors?.required
+          (loginForm.controls['email'].errors?.email ||
+            loginForm.controls['email'].errors?.required) &&
+          loginForm.controls['email'].touched
             ? 'danger'
             : 'basic'
         "
@@ -24,7 +25,7 @@
       <small
         *ngIf="
           loginForm.controls['email'].errors?.email &&
-          loginForm.controls['email'].dirty
+          loginForm.controls['email'].touched
         "
         class="text-danger"
         >Ingresa un correo válido</small
@@ -32,7 +33,7 @@
       <small
         *ngIf="
           loginForm.controls['email'].errors?.required &&
-          loginForm.controls['email'].dirty
+          loginForm.controls['email'].touched
         "
         class="text-danger"
         >El correo es requerido</small
@@ -48,8 +49,9 @@
         nbInput
         fullWidth
         [status]="
-          loginForm.controls['password'].errors?.required ||
-          loginForm.controls['password'].errors?.minlength
+          (loginForm.controls['password'].errors?.required ||
+            loginForm.controls['password'].errors?.minlength) &&
+          loginForm.controls['password'].touched
             ? 'danger'
             : 'basic'
         "
@@ -58,7 +60,7 @@
       <small
         *ngIf="
           loginForm.controls['password'].errors?.required &&
-          loginForm.controls['password'].dirty
+          loginForm.controls['password'].touched
         "
         class="text-danger"
         >La contraseña es requerida</small
@@ -66,25 +68,32 @@
       <small
         *ngIf="
           loginForm.controls['password'].errors?.minlength &&
-          loginForm.controls['password'].dirty
+          loginForm.controls['password'].touched
         "
         class="text-danger"
         >Se requieren al menos 6 caracteres</small
       >
     </div>
-    <small class="forgot-pass"><a href="#">Olvidaste tu contraseña?</a></small>
+    <small class="text-right"><a href="#">Olvidaste tu contraseña?</a></small>
 
     <div class="buttons">
       <button type="submit" nbButton fullWidth hero status="primary">
         Iniciar sesión
       </button>
       <p class="separator">O también</p>
-      <button type="button" class="google-btn" nbButton fullWidth>
+      <button
+        appGoogleSignin
+        (signin)="loginGoogle($event)"
+        type="button"
+        class="google-btn"
+        nbButton
+        fullWidth
+      >
         <img src="../assets/icons/icon-google.svg" class="google-icon" />
         Ingresar con Google
       </button>
     </div>
-    <small class="to-signin"
+    <small class="text-center"
       >No tienes cuenta? <a href="#">Registrate aquí</a></small
     >
   </form>

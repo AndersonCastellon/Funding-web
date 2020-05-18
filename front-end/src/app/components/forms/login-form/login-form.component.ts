@@ -5,7 +5,6 @@ import { AuthService } from 'src/app/core/services/auth.service';
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
-  styleUrls: ['./login-form.component.scss'],
 })
 export class LoginFormComponent implements OnInit {
   loginForm: FormGroup;
@@ -47,5 +46,7 @@ export class LoginFormComponent implements OnInit {
     this.authS.login(credentials).subscribe((res) => {});
   }
 
-  loginGoogle(gToken: string) {}
+  loginGoogle(gToken: string) {
+    console.log(gToken);
+  }
 }

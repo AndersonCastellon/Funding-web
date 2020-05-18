@@ -1,0 +1,142 @@
+<div class="signin-form">
+  <div class="title">
+    <p>Bienvenido de nuevo</p>
+    <small>Ingresa para continuar</small>
+  </div>
+  <form [formGroup]="signinForm" (ngSubmit)="signin()" class="form">
+    <div class="input-g">
+      <label class="label-ctrl">Nombre completo</label>
+      <input
+        formControlName="name"
+        name="name"
+        class="input-ctrl"
+        type="text"
+        nbInput
+        fullWidth
+        [status]="
+          signinForm.controls['name'].errors?.required &&
+          signinForm.controls['name'].touched
+            ? 'danger'
+            : 'basic'
+        "
+        placeholder="Nombre"
+      />
+      <small
+        *ngIf="
+          signinForm.controls['name'].errors?.required &&
+          signinForm.controls['name'].touched
+        "
+        class="text-danger"
+        >El nombre es requerido</small
+      >
+    </div>
+    <div class="input-g">
+      <label class="label-ctrl">Email</label>
+      <input
+        formControlName="email"
+        name="email"
+        class="input-ctrl"
+        type="email"
+        nbInput
+        fullWidth
+        [status]="
+          (signinForm.controls['email'].errors?.email ||
+            signinForm.controls['email'].errors?.required) &&
+          signinForm.controls['email'].touched
+            ? 'danger'
+            : 'basic'
+        "
+        placeholder="Email"
+      />
+      <small
+        *ngIf="
+          signinForm.controls['email'].errors?.email &&
+          signinForm.controls['email'].touched
+        "
+        class="text-danger"
+        >Ingresa un correo válido</small
+      >
+      <small
+        *ngIf="
+          signinForm.controls['email'].errors?.required &&
+          signinForm.controls['email'].touched
+        "
+        class="text-danger"
+        >El correo es requerido</small
+      >
+    </div>
+    <div class="input-g">
+      <label class="label-ctrl">Password</label>
+      <input
+        formControlName="password1"
+        name="password1"
+        class="input-ctrl"
+        type="password"
+        nbInput
+        fullWidth
+        [status]="
+          (signinForm.controls['password1'].errors?.required ||
+            signinForm.controls['password1'].errors?.minlength) &&
+          signinForm.controls['password1'].touched
+            ? 'danger'
+            : 'basic'
+        "
+        placeholder="Password"
+      />
+      <small
+        *ngIf="
+          signinForm.controls['password1'].errors?.required &&
+          signinForm.controls['password1'].touched
+        "
+        class="text-danger"
+        >La contraseña es requerida</small
+      >
+      <small
+        *ngIf="
+          signinForm.controls['password1'].errors?.minlength &&
+          signinForm.controls['password1'].touched
+        "
+        class="text-danger"
+        >Se requieren al menos 6 caracteres</small
+      >
+    </div>
+    <div class="input-g">
+      <label class="label-ctrl">Confirmar password</label>
+      <input
+        formControlName="password2"
+        name="password2"
+        class="input-ctrl"
+        type="password"
+        nbInput
+        fullWidth
+        [status]="
+          (signinForm.controls['password2'].errors?.required ||
+            signinForm.errors?.differentPassword ||
+            signinForm.controls['password2'].errors?.minlength) &&
+          signinForm.controls['password2'].touched
+            ? 'danger'
+            : 'basic'
+        "
+        placeholder="Confirmar password"
+      />
+      <small
+        *ngIf="
+          (signinForm.errors?.differentPassword ||
+            signinForm.controls['password2'].errors?.required) &&
+          signinForm.controls['password2'].touched
+        "
+        class="text-danger"
+        >Las contraseñas no coinciden</small
+      >
+    </div>
+
+    <div class="buttons">
+      <button type="submit" nbButton fullWidth hero status="primary">
+        Crear cuenta
+      </button>
+    </div>
+    <small class="text-center"
+      >Ya tienes cuenta? <a href="#">Ingresa aquí</a></small
+    >
+  </form>
+</div>

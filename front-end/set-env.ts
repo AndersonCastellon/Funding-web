@@ -7,7 +7,8 @@ const targetPath = './src/environments/environment.ts';
 const enviromentFile = `
   export const environment = {
     production: ${process.env.PRODUCTION},
-    apiUrl: '${process.env.API_BASE_URL}'
+    apiUrl: '${process.env.API_BASE_URL}',
+    googleClientID: '${process.env.G_CLIENT_ID}'
   };
  `;
 

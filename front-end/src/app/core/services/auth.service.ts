@@ -6,6 +6,8 @@ import { map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { User } from 'src/app/models';
 
+import * as jwt_decode from 'jwt-decode';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -21,7 +23,16 @@ export class AuthService {
     this.token = localStorage.getItem('token') || null;
   }
 
-  signin() {}
+  signin(user: User) {
+    const endPoint = this.URL + '/auth/signin';
+    return this.http.post(endPoint, user).pipe(
+      map((resp: any) => {
+        this.saveUserLocal(resp.user, resp.token);
+        this.auth.next(true);
+        return true;
+      })
+    );
+  }
 
   login(credentials: { email: string; password: string }): Observable<any> {
     const endPoint = this.URL + '/auth/login';
@@ -35,6 +46,23 @@ export class AuthService {
   }
 
   loginGoogle(gToken: string) {}
+
+  isLogged() {
+    let isLogged = true;
+    let decoded: User;
+
+    if (!this.token) {
+      isLogged = false;
+    } else {
+      decoded = jwt_decode(this.token);
+    }
+
+    if (!this.user || this.user._id !== decoded._id) {
+      isLogged = false;
+    }
+
+    return isLogged;
+  }
 
   private saveUserLocal(user: User, token: string) {
     this.user = user;

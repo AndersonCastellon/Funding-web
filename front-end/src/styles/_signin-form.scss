@@ -1,0 +1,20 @@
+@import "~bootstrap/scss/mixins/breakpoints";
+@import "~@nebular/theme/styles/global/breakpoints";
+@import "../themes";
+
+@include nb-install-component() {
+  .signin-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .to-login {
+    align-self: center;
+    margin-top: 4px;
+
+    a {
+      font-weight: bold;
+    }
+  }
+}
