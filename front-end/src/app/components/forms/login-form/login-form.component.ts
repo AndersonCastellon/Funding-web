@@ -43,10 +43,10 @@ export class LoginFormComponent implements OnInit {
       password: this.loginForm.value.password,
     };
 
-    this.authS.login(credentials).subscribe((res) => {});
+    this.authS.login(credentials).subscribe();
   }
 
   loginGoogle(gToken: string) {
-    console.log(gToken);
+    this.authS.loginGoogle(gToken).subscribe();
   }
 }

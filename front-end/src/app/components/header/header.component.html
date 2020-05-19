@@ -14,9 +14,22 @@
 </div>
 
 <div class="header-container">
-  <nb-actions>
+  <nb-actions *ngIf="!user">
     <nb-action>Iniciar primera campaña</nb-action>
     <nb-action (click)="onLogin()">Ingresar</nb-action>
     <nb-action (click)="onSignin()">Registro</nb-action>
+  </nb-actions>
+  <nb-actions *ngIf="user">
+    <nb-action>Iniciar primera campaña</nb-action>
+    <nb-action>
+      <nb-user
+        size="medium"
+        [name]="user.name"
+        [picture]="user.photo"
+        [nbContextMenu]="items"
+        [nbContextMenuTag]="contextMenuTag"
+      >
+      </nb-user>
+    </nb-action>
   </nb-actions>
 </div>

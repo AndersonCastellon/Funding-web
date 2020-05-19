@@ -17,6 +17,9 @@ import {
   NbInputModule,
   NbButtonModule,
   NbIconModule,
+  NbUserModule,
+  NbContextMenuModule,
+  NbMenuModule,
 } from '@nebular/theme';
 
 import { NbEvaIconsModule } from '@nebular/eva-icons';
@@ -55,6 +58,9 @@ import { GoogleSigninDirective } from './core/directives/google-signin.directive
     NbInputModule,
     NbButtonModule,
     NbIconModule,
+    NbUserModule,
+    NbMenuModule.forRoot(),
+    NbContextMenuModule,
     NbWindowModule.forRoot({ windowClass: 'window' }),
   ],
   providers: [],

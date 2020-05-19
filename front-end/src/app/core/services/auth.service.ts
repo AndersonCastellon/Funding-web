@@ -16,7 +16,7 @@ export class AuthService {
   private user: User;
   private token: string;
 
-  public auth = new Subject<boolean>();
+  public authUser = new Subject<User>();
 
   constructor(private http: HttpClient) {
     this.user = JSON.parse(localStorage.getItem('user')) || null;
@@ -28,7 +28,7 @@ export class AuthService {
     return this.http.post(endPoint, user).pipe(
       map((resp: any) => {
         this.saveUserLocal(resp.user, resp.token);
-        this.auth.next(true);
+        this.authUser.next(resp.user);
         return true;
       })
     );
@@ -39,13 +39,27 @@ export class AuthService {
     return this.http.post(endPoint, credentials).pipe(
       map((resp: any) => {
         this.saveUserLocal(resp.user, resp.token);
-        this.auth.next(true);
+        this.authUser.next(resp.user);
         return true;
       })
     );
   }
 
-  loginGoogle(gToken: string) {}
+  loginGoogle(gToken: string) {
+    const endPoint = this.URL + '/auth/login/google';
+    return this.http.post(endPoint, { gToken }).pipe(
+      map((resp: any) => {
+        console.log(resp);
+        this.saveUserLocal(resp.user, resp.token);
+        this.authUser.next(resp.user);
+        return true;
+      })
+    );
+  }
+
+  getCurrentUser() {
+    return this.user;
+  }
 
   isLogged() {
     let isLogged = true;
@@ -70,5 +84,12 @@ export class AuthService {
 
     localStorage.user = JSON.stringify(user);
     localStorage.token = token;
+  }
+
+  logout() {
+    localStorage.clear();
+    this.user = null;
+    this.token = null;
+    this.authUser.next(this.user);
   }
 }
