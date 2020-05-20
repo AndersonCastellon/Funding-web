@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { SigninFormComponent } from '../forms';
 import { User } from 'src/app/models';
 import { filter, map } from 'rxjs/operators';
+import { AuthFormsFlowService } from 'src/app/core/services/auth-forms-flow.service';
 
 import {
   NbWindowService,
@@ -22,6 +23,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private loginFormRef: NbWindowRef;
   private signinFormRef: NbWindowRef;
 
+  private toLogin: Subscription;
+  private toSignin: Subscription;
+
   private authOb: Subscription;
 
   user: User;
@@ -38,11 +42,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private windowService: NbWindowService,
     private authS: AuthService,
     private nbMenuService: NbMenuService,
+    private authFormsFlow: AuthFormsFlowService,
     @Inject(NB_WINDOW) private window: any
   ) {}
 
   ngOnInit(): void {
-    this.user = this.authS.getCurrentUser();
+    this.authS.isLogged()
+      ? (this.user = this.authS.getCurrentUser())
+      : this.authS.logout();
+
+    this.formsFlow();
+
     this.authOb = this.authS.authUser.subscribe((user) => {
       this.user = user;
       this.loginFormClose();
@@ -58,6 +68,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   onSignin() {
     this.signinFormRef = this.windowService.open(SigninFormComponent);
+  }
+
+  private formsFlow() {
+    this.toLogin = this.authFormsFlow.toLoginObs.subscribe(() => {
+      this.signinFormClose();
+      this.onLogin();
+    });
+
+    this.toSignin = this.authFormsFlow.toSigninObs.subscribe(() => {
+      this.loginFormRef.close();
+      this.onSignin();
+    });
   }
 
   private loginFormClose() {
@@ -104,5 +126,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.authOb.unsubscribe();
+    this.toLogin.unsubscribe();
+    this.toSignin.unsubscribe();
   }
 }

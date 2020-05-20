@@ -20,6 +20,10 @@
   flex-direction: column;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 @import "./styles/inputs";
 @import "./styles/title-auth-form";
 @import "./styles/login-form";

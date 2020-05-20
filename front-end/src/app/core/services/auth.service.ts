@@ -7,6 +7,7 @@ import { environment } from '../../../environments/environment';
 import { User } from 'src/app/models';
 
 import * as jwt_decode from 'jwt-decode';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root',
@@ -63,7 +64,7 @@ export class AuthService {
 
   isLogged() {
     let isLogged = true;
-    let decoded: User;
+    let decoded: any;
 
     if (!this.token) {
       isLogged = false;
@@ -71,7 +72,11 @@ export class AuthService {
       decoded = jwt_decode(this.token);
     }
 
-    if (!this.user || this.user._id !== decoded._id) {
+    if (!this.user || this.user._id !== decoded.user._id) {
+      isLogged = false;
+    }
+
+    if (!decoded || decoded.exp <= moment().unix()) {
       isLogged = false;
     }
 

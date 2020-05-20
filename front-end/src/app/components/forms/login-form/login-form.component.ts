@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { AuthFormsFlowService } from 'src/app/core/services/auth-forms-flow.service';
 
 @Component({
   selector: 'app-login-form',
@@ -9,7 +10,11 @@ import { AuthService } from 'src/app/core/services/auth.service';
 export class LoginFormComponent implements OnInit {
   loginForm: FormGroup;
 
-  constructor(private build: FormBuilder, private authS: AuthService) {}
+  constructor(
+    private build: FormBuilder,
+    private authS: AuthService,
+    public authFormsFlow: AuthFormsFlowService
+  ) {}
 
   ngOnInit(): void {
     this.loginForm = this.build.group({

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { User } from 'src/app/models';
+import { AuthFormsFlowService } from 'src/app/core/services/auth-forms-flow.service';
 
 @Component({
   selector: 'app-signin-form',
@@ -9,7 +10,11 @@ import { User } from 'src/app/models';
 })
 export class SigninFormComponent implements OnInit {
   signinForm: FormGroup;
-  constructor(private build: FormBuilder, private authS: AuthService) {}
+  constructor(
+    private build: FormBuilder,
+    private authS: AuthService,
+    public authFormsFlow: AuthFormsFlowService
+  ) {}
 
   ngOnInit(): void {
     this.signinForm = this.build.group(
